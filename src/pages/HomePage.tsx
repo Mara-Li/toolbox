@@ -16,8 +16,8 @@ const HomePage: React.FC = () => {
 						<Card
 							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 							key={index}
-							title={data.title}
-							description={data.description}
+							title={data.title ?? "Titre non défini"}
+							description={data.description ?? "Description non définie"}
 							image={data.og_image}
 							url={data.project}
 						/>

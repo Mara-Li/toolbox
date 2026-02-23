@@ -1,5 +1,13 @@
 [
   {
+    "project": "/arknights-endfields/",
+    "title": "Arknights Endfields Pull Calculator",
+    "description": "Calculez rapidement le nombre de pulls possibles dans Arknights Endfield en fonction de vos ressources.",
+    "url": "https://project.mara-li.fr/arknights-endfields/",
+    "og_image": "/assets/arknights.jpg",
+    "icon": "/assets/arknights.jpg"
+  },
+  {
     "project": "/remove_bg/",
     "title": "Remove (White) Pixel",
     "description": "Remove white Pixels from images with ease! Upload or paste an image, adjust tolerance, and get your processed result. All is done in the browser, without AI, GMO and pesticide!",

@@ -10,7 +10,8 @@ function extractMetadataPlugin() {
 		buildStart() {
 			console.log("Extraction des métadonnées...");
 
-			const projects = ["./remove_bg", "."]; // Dossiers contenant les fichiers index.html
+			const projects = ["./arknights-endfields", "./remove_bg", "."]; // Dossiers contenant les fichiers index.html
+
 			const metadata = [];
 
 			for (const project of projects) {
@@ -69,6 +70,7 @@ export default defineConfig({
 			input: {
 				main: "./src/index.html", // Point d'entrée principal
 				remove_bg: "./src/remove_bg/index.html", // Point d'entrée secondaire
+				arknights: "./src/arknights-endfields/index.html", // nouveau projet web
 			},
 		},
 		assetsDir: "assets",
