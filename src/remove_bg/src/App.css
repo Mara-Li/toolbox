@@ -22,7 +22,8 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 20px; /* Espacement entre le slider et le bouton */
+	gap: 20px;
+	/* Espacement entre le slider et le bouton */
 	margin: 20px 0;
 }
 
@@ -60,11 +61,13 @@ img {
 	border-radius: 10px;
 	font-size: 16px;
 	box-sizing: border-box;
-	cursor: pointer; /* Rendre l'encart cliquable */
+	cursor: pointer;
+	/* Rendre l'encart cliquable */
 }
 
 input[type="file"] {
-	display: none; /* Masquer complètement le bouton */
+	display: none;
+	/* Masquer complètement le bouton */
 }
 
 button {
@@ -84,9 +87,12 @@ button:hover {
 
 .refresh-button {
 	display: flex;
-	align-items: center; /* Aligne verticalement l'icône et le texte */
-	justify-content: center; /* Centre horizontalement l'ensemble */
-	gap: 8px; /* Espacement entre l'icône et le texte */
+	align-items: center;
+	/* Aligne verticalement l'icône et le texte */
+	justify-content: center;
+	/* Centre horizontalement l'ensemble */
+	gap: 8px;
+	/* Espacement entre l'icône et le texte */
 	padding: 10px 20px;
 	font-size: 16px;
 	border: none;
@@ -106,6 +112,7 @@ button:hover {
 	top: 2px;
 }
 
+h2,
 h1 {
 	font-family: "Gamja Flower", Aptos, "Arial Rounded MT Bold", Arial, sans-serif;
 }
@@ -126,8 +133,10 @@ h1 {
 	}
 
 	.controls {
-		flex-direction: column; /* Met les boutons en colonne */
-		gap: 10px; /* Réduit l'espacement vertical */
+		flex-direction: column;
+		/* Met les boutons en colonne */
+		gap: 10px;
+		/* Réduit l'espacement vertical */
 	}
 }
 
@@ -161,21 +170,29 @@ h1 {
 	justify-content: center;
 	width: 40px;
 	height: 40px;
-	background-color: #ffffff; /* Fond blanc */
-	border: 2px solid #e1e8ed; /* Bordure douce */
-	border-radius: 50%; /* Bouton rond */
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre subtile */
-	text-decoration: none; /* Supprime le soulignement */
+	background-color: #ffffff;
+	/* Fond blanc */
+	border: 2px solid #e1e8ed;
+	/* Bordure douce */
+	border-radius: 50%;
+	/* Bouton rond */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	/* Ombre subtile */
+	text-decoration: none;
+	/* Supprime le soulignement */
 	transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .home-button:hover {
-	background-color: #f5f8fa; /* Changement de fond au survol */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+	background-color: #f5f8fa;
+	/* Changement de fond au survol */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	/* Ombre plus marquée */
 }
 
 .home-button svg {
-	color: #1da1f2; /* Bleu Twitter-like */
+	color: #1da1f2;
+	/* Bleu Twitter-like */
 	width: 24px;
 	height: 24px;
 }

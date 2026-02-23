@@ -78,6 +78,7 @@ export const App: React.FC = () => {
 				<Icon icon="mdi:home" width="32" height="32" />
 			</a>
 			<h1>Arknights Endfields</h1>
+			<h2>How much can I pull?</h2>
 
 			<div className="inputs-grid">
 				<label>
@@ -140,7 +141,7 @@ export const App: React.FC = () => {
 						</span>
 					</div>
 					<div className="result-item total-ticket">
-						<span className="result-label">Tickets total</span>
+						<span className="result-label">Total tickets</span>
 						<span className="result-value">{totalTicket}</span>
 					</div>
 					<div className="result-item">
