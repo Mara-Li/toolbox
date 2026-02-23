@@ -1,11 +1,11 @@
 /* simple styling borrowed from other sections */
 
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 body {
 	margin: 0;
-	font-family: "Atkinson Hyperlegible Next", Aptos, "Arial Rounded MT Bold", Arial, sans-serif;
+	font-family: "Atkinson Hyperlegible Next", Aptos, "Arial Rounded MT Bold",
+		Arial, sans-serif;
 	background-color: #f4f4f9;
 	color: #333;
 }
@@ -68,6 +68,12 @@ h1 {
 	gap: 10px 20px;
 }
 
+/* ticket total occupies full width */
+.result-item.total-ticket {
+	grid-column: 1 / -1;
+	justify-content: space-between;
+}
+
 .result-item {
 	display: flex;
 	justify-content: space-between;
@@ -101,6 +107,29 @@ h1 {
 	display: block;
 	font-size: 2em;
 	color: #007bff;
+}
+
+.cache-indicator {
+	font-size: 0.8em;
+	color: #666;
+	margin-left: 8px;
+}
+
+.reset-button {
+	margin: 15px auto 0;
+	display: block;
+	padding: 8px 16px;
+	font-size: 1em;
+	border: none;
+	border-radius: 5px;
+	background-color: #dc3545;
+	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+	background-color: #c82333;
 }
 
 .home-button {
@@ -140,7 +169,6 @@ h1 {
 }
 
 @media (max-width: 600px) {
-
 	.inputs-grid,
 	.result-grid {
 		grid-template-columns: 1fr;

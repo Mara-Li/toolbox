@@ -1,22 +1,71 @@
-import { useState } from "react";
 import { Icon } from "@iconify/react";
+import React, { useState } from "react";
 import Meta from "../../Meta.tsx";
 import "./App.css";
 
 export const App: React.FC = () => {
 	console.log("EndfieldsApp rendered");
-	const [oroberyl, setOroberyl] = useState<number>(0);
-	const [origeometry, setOrigeometry] = useState<number>(0);
-	const [ticket, setTicket] = useState<number>(0);
-	const [bondQuota, setBondQuota] = useState<number>(0);
-	const [aicQuotaNumber, setAicQuotaNumber] = useState<number>(0);
-	const [aicQuotaPrice, setAicQuotaPrice] = useState<number>(70);
+	// try to initialize inputs from saved values
+	const savedInputs = (() => {
+		try {
+			const raw = localStorage.getItem("arknightsInputs");
+			return raw ? JSON.parse(raw) : null;
+		} catch {
+			return null;
+		}
+	})();
 
-	const origeometryValue = origeometry * 75;
-	const aicTicket = Math.min(5, Math.floor(aicQuotaNumber / aicQuotaPrice));
-	const bondTicket = Math.floor(bondQuota / 25);
-	const totalTicket = ticket + aicTicket + bondTicket;
-	const totalPull = Math.floor((oroberyl + origeometryValue) / 500) + totalTicket;
+	const [oroberyl, setOroberyl] = useState<number>(savedInputs?.oroberyl ?? 0);
+	const [origeometry, setOrigeometry] = useState<number>(
+		savedInputs?.origeometry ?? 0,
+	);
+	const [ticket, setTicket] = useState<number>(savedInputs?.ticket ?? 0);
+	const [bondQuota, setBondQuota] = useState<number>(
+		savedInputs?.bondQuota ?? 0,
+	);
+	const [aicQuotaNumber, setAicQuotaNumber] = useState<number>(
+		savedInputs?.aicQuotaNumber ?? 0,
+	);
+	const [aicQuotaPrice, setAicQuotaPrice] = useState<number>(
+		savedInputs?.aicQuotaPrice ?? 70,
+	);
+
+	// compute derived values in a memo so they only change when inputs change
+	const { aicTicket, bondTicket, totalTicket, totalPull, resourcesValue } =
+		React.useMemo(() => {
+			const roValue = origeometry * 75;
+			const aic = Math.min(5, Math.floor(aicQuotaNumber / aicQuotaPrice));
+			const bond = Math.floor(bondQuota / 25);
+			const tTicket = ticket + aic + bond;
+			const pulls = Math.floor((oroberyl + roValue) / 500) + tTicket;
+			return {
+				aicTicket: aic,
+				bondTicket: bond,
+				totalTicket: tTicket,
+				totalPull: pulls,
+				resourcesValue: oroberyl + roValue,
+			};
+		}, [
+			oroberyl,
+			origeometry,
+			ticket,
+			bondQuota,
+			aicQuotaNumber,
+			aicQuotaPrice,
+		]);
+
+	// persist input values so they survive reload
+	React.useEffect(() => {
+		const inputs = {
+			oroberyl,
+			origeometry,
+			ticket,
+			bondQuota,
+			aicQuotaNumber,
+			aicQuotaPrice,
+		};
+		localStorage.setItem("arknightsInputs", JSON.stringify(inputs));
+	}, [oroberyl, origeometry, ticket, bondQuota, aicQuotaNumber, aicQuotaPrice]);
 
 	return (
 		<div className="arknights-container">
@@ -72,7 +121,7 @@ export const App: React.FC = () => {
 					/>
 				</label>
 				<label>
-					AIC price (per ticket)
+					AIC ticket price
 					<input
 						type="number"
 						value={aicQuotaPrice}
@@ -84,25 +133,29 @@ export const App: React.FC = () => {
 			<div className="result-box">
 				<h2>Results</h2>
 				<div className="result-grid">
-					<div className="result-item">
-						<span className="result-label">Tickets owned</span>
-						<span className="result-value">{totalTicket}</span>
+					<div className="result-item total-ticket">
+						<span className="result-label">Pulls via resources</span>
+						<span className="result-value">
+							{Math.floor(resourcesValue / 500)}
+						</span>
 					</div>
-					<div className="result-item">
-						<span className="result-label">AIC tickets</span>
-						<span className="result-value">{aicTicket}</span>
+					<div className="result-item total-ticket">
+						<span className="result-label">Tickets total</span>
+						<span className="result-value">{totalTicket}</span>
 					</div>
 					<div className="result-item">
 						<span className="result-label">Bond tickets</span>
 						<span className="result-value">{bondTicket}</span>
 					</div>
+
 					<div className="result-item">
-						<span className="result-label">Oroberyl + origeometry</span>
-						<span className="result-value">{oroberyl + origeometryValue}</span>
+						<span className="result-label">AIC tickets</span>
+						<span className="result-value">{aicTicket}</span>
 					</div>
-					<div className="result-item">
-						<span className="result-label">Pulls via resources</span>
-						<span className="result-value">{Math.floor((oroberyl + origeometryValue) / 500)}</span>
+
+					<div className="result-item total-ticket">
+						<span className="result-label">Ressources only</span>
+						<span className="result-value">{resourcesValue}</span>
 					</div>
 				</div>
 				<div className="total-pulls">
@@ -110,6 +163,22 @@ export const App: React.FC = () => {
 					<span className="total-value">{totalPull}</span>
 				</div>
 			</div>
+			<button
+				type="button"
+				className="reset-button"
+				onClick={() => {
+					setOroberyl(0);
+					setOrigeometry(0);
+					setTicket(0);
+					setBondQuota(0);
+					setAicQuotaNumber(0);
+					setAicQuotaPrice(70);
+					localStorage.removeItem("arknightsInputs");
+				}}
+			>
+				Reset
+			</button>
+			<br />
 		</div>
 	);
 };
